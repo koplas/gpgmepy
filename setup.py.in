@@ -229,11 +229,8 @@ swige = Extension(
     extra_link_args=libs)
 
 setup(
-    name='gpg',
     cmdclass={'build': BuildExtFirstHack},
     version='@VERSION@',
-    # Note: description appears as Summary in egg-info file.
-    description='Python bindings to the GPGME API of the GnuPG cryptography library.',
     # Note: long-description appears as Description in egg-info file.
     long_description='''Dynamically generated bindings to the C API of the GNU Privacy Guard.
 
@@ -257,31 +254,9 @@ GPGME and these bindings is available here:
 
     https://gnupg.org/software/gpgme/index.html
 ''',
-    author='The GnuPG hackers',
-    author_email='gnupg-devel@gnupg.org',
-    url='https://www.gnupg.org',
     ext_modules=[swige],
     packages=[
         'gpg', 'gpg.constants', 'gpg.constants.data', 'gpg.constants.keylist',
         'gpg.constants.sig', 'gpg.constants.tofu'
-    ],
-    license='LGPL2.1+ (the library), GPL2+ (tests and examples)',
-    classifiers=[
-        'Development Status :: 4 - Beta',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: GNU Lesser General Public License v2 or later (LGPLv2+)',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.9',
-        'Programming Language :: Python :: 3.10',
-        'Programming Language :: Python :: 3.11',
-        'Programming Language :: Python :: 3.12',
-        'Programming Language :: Python :: 3.13',
-        'Operating System :: POSIX',
-        'Operating System :: Microsoft :: Windows',
-        'Topic :: Communications :: Email',
-        'Topic :: Security :: Cryptography',
     ],
 )
