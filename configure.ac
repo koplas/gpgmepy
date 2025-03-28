@@ -306,6 +306,20 @@ else
         AM_PATH_PYTHON(m4_if(mym4pythonver,[any],[3.6],mym4pythonver), [
             AX_PYTHON_DEVEL([], [true])
             if test "$PYTHON_VERSION"; then
+                AC_MSG_CHECKING([for the setuptools Python package])
+                ac_setuptools_result=`$PYTHON -c "import setuptools" 2>&1`
+                if test $? -eq 0; then
+                    AC_MSG_RESULT([yes])
+                else
+                    AC_MSG_RESULT([no])
+                    AC_MSG_WARN([
+*** cannot import Python module "setuptools".
+*** Please check your Python installation. The error was:
+*** $ac_setuptools_result])
+                    PYTHON_VERSION=""
+                fi
+            fi
+            if test "$PYTHON_VERSION"; then
                     PYTHONS="$(echo $PYTHONS $PYTHON)"
                     PYTHON_VERSIONS="$(echo $PYTHON_VERSIONS $PYTHON_VERSION)"
             fi
