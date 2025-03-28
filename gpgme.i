@@ -624,7 +624,6 @@ struct _gpgme_sig_notation
 %pointer_functions(gpgme_data_t, gpgme_data_t_p);
 %pointer_functions(gpgme_key_t, gpgme_key_t_p);
 %pointer_functions(gpgme_error_t, gpgme_error_t_p);
-%pointer_functions(gpgme_trust_item_t, gpgme_trust_item_t_p);
 %pointer_functions(gpgme_engine_info_t, gpgme_engine_info_t_p);
 
 /* Helper functions.  */

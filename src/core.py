@@ -1246,29 +1246,6 @@ class Context(GpgmeWrapper):
         key.__del__ = lambda self: gpgme.gpgme_key_unref(self)
         return key
 
-    def op_trustlist_all(self, *args, **kwargs):
-        self.op_trustlist_start(*args, **kwargs)
-        trust = self.op_trustlist_next()
-        while trust:
-            yield trust
-            trust = self.op_trustlist_next()
-        self.op_trustlist_end()
-
-    def op_trustlist_next(self):
-        """Returns the next trust item in the list created
-        by a call to op_trustlist_start().  The object returned
-        is of type TrustItem."""
-        ptr = gpgme.new_gpgme_trust_item_t_p()
-        try:
-            errorcheck(gpgme.gpgme_op_trustlist_next(self.wrapped, ptr))
-            trust = gpgme.gpgme_trust_item_t_p_value(ptr)
-        except errors.GPGMEError as excp:
-            trust = None
-            if excp.getcode() != errors.EOF:
-                raise
-        gpgme.delete_gpgme_trust_item_t_p(ptr)
-        return trust
-
     def set_passphrase_cb(self, func, hook=None):
         """Sets the passphrase callback to the function specified by func.
 
