@@ -59,6 +59,9 @@ copystamp:
 	touch $@
 
 all-local: copystamp
+	for f in $(EXTRA_DIST); do \
+		cp -v $(srcdir)/$$f $(builddir)/; \
+	done
 	set -e ; for PYTHON in $(PYTHONS); do \
 	  CPP="$(CPP)" \
 	  CFLAGS="$(CFLAGS)" \
