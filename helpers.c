@@ -839,7 +839,7 @@ static ssize_t pyDataReadCb(void *hook, void *buffer, size_t size)
     goto leave;
   }
 
-  if (PyBytes_Size(retval) > size) {
+  if ((size_t) PyBytes_Size(retval) > size) {
     PyErr_Format(PyExc_TypeError,
                  "expected %zu bytes from read callback, got %zu",
                  size, PyBytes_Size(retval));

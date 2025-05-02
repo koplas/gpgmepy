@@ -219,7 +219,7 @@
 #else
       new_data = gpgme_data_release_and_get_mem (wrapper$argnum, &new_size);
       wrapper$argnum = NULL;
-      dirty = new_size != view$argnum.len
+      dirty = new_size != (size_t) view$argnum.len
         || memcmp (new_data, view$argnum.buf, view$argnum.len);
 #endif
 
@@ -235,7 +235,7 @@
             }
 
           /* See if we need to truncate the buffer.  */
-          if (resultobj && view$argnum.len != new_size)
+          if (resultobj && (size_t) view$argnum.len != new_size)
             {
               if (bytesio$argnum == NULL)
                 {
@@ -271,7 +271,7 @@
 
                       Py_XDECREF(retval);
 
-                      if (resultobj && view$argnum.len
+                      if (resultobj && (size_t) view$argnum.len
                           != new_size)
                         {
                           Py_XDECREF(resultobj);
