@@ -38,6 +38,7 @@ EXTRA_DIST = \
 	autogen.sh autogen.rc \
 	gpgme.i \
 	helpers.c helpers.h private.h \
+	pyproject.toml \
 	build-aux/libtool-patch.sed \
 	doc/DCO doc/HACKING
 
