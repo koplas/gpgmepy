@@ -116,7 +116,12 @@ static void _gpg_stash_callback_exception(PyObject *weak_self)
     PyTuple_SetItem(excinfo, 2, Py_None);
   }
 
+#if PY_VERSION_HEX >= 0x030d0000
+  PyWeakref_GetRef(weak_self, &self);
+  Py_DECREF(self);
+#else
   self = PyWeakref_GetObject(weak_self);
+#endif
   /* self only has a borrowed reference.  */
   if (self == Py_None) {
     /* This should not happen, as even if we're called from the data

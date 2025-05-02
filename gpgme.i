@@ -71,14 +71,14 @@
 
 /* Likewise for a list of strings.  */
 %typemap(in) const char *[] (void *vector = NULL,
-                             size_t size,
+                             size_t size = 0,
                              PyObject **pyVector = NULL) {
   /* Check if is a list */
   if (PyList_Check($input)) {
     size_t i, j;
     size = PyList_Size($input);
     $1 = (char **) (vector = malloc((size+1) * sizeof(char *)));
-    pyVector = calloc(sizeof *pyVector, size);
+    pyVector = calloc(size, sizeof *pyVector);
 
     for (i = 0; i < size; i++) {
       PyObject *o = PyList_GetItem($input,i);
@@ -319,8 +319,10 @@
   else if (PyInt_Check($input))
     $1 = PyInt_AsLong($input);
 #endif
-  else
+  else {
     PyErr_SetString(PyExc_TypeError, "Numeric argument expected");
+    return NULL;
+    }
 }
 
 %typemap(out) off_t {
@@ -342,8 +344,10 @@
   else if (PyInt_Check($input))
     $1 = PyInt_AsLong($input);
 #endif
-  else
+  else {
     PyErr_SetString(PyExc_TypeError, "Numeric argument expected");
+    return NULL;
+    }
 }
 
 /* Those are for gpgme_data_read() and gpgme_strerror_r().  */
